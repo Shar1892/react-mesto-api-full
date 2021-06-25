@@ -1,0 +1,17 @@
+.auth-form__link {
+	padding-top: 15px;
+	color: #ffffff;
+	text-align: center;
+	text-decoration: none;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 17px;
+	-webkit-font-smoothing: antialiased;
+	transition: opacity 0.5s linear;
+}
+
+.auth-form__link:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}

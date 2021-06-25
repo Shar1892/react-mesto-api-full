@@ -1,0 +1,19 @@
+.auth-form__input {
+	background: #000000;
+	color: #ffffff;
+	border: 0;
+	border-bottom: 2px solid rgba(204, 204, 204, 0.2);
+	box-sizing: border-box;
+	margin-top: 27px;
+	font-size: 14px;
+	line-height: 17px;
+	padding-bottom: 13px;
+	-webkit-font-smoothing: antialiased;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.auth-form__input:first-of-type {
+	margin-top: 47px;
+}

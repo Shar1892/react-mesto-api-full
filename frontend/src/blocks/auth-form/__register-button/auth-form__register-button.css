@@ -1,0 +1,16 @@
+.auth-form__register-button {
+	margin-top: 216px;
+	height: 50px;
+	border: 0;
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 18px;
+	line-height: 22px;
+	-webkit-font-smoothing: antialiased;
+	transition: opacity 0.5s linear;
+}
+
+.auth-form__register-button:hover {
+	opacity: 0.85;
+	cursor: pointer;
+}
