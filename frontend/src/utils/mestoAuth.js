@@ -2,6 +2,7 @@ export const BASE_URL = "https://api.mestoproject.sgsharov.nomoredomains.club";
 
 export const register = (email, password) => {
 	return fetch(`${BASE_URL}/signup`, {
+		mode: 'no-cors',
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -20,6 +21,7 @@ export const register = (email, password) => {
 
 export const authorize = (email, password) => {
 	return fetch(`${BASE_URL}/signin`, {
+		mode: 'no-cors',
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -47,6 +49,7 @@ export const authorize = (email, password) => {
 
 export const getContent = (token) => {
 	return fetch(`${BASE_URL}/users/me`, {
+		mode: 'no-cors',
 		method: "GET",
 		headers: {
 			Accept: "application/json",

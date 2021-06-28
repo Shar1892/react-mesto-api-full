@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-const { requestLogger, errorLogger } = require('./middlewares/Logger');
 
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundErr = require('./errors/NotFoundErr');
+const { requestLogger, errorLogger } = require('./middlewares/Logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -57,11 +57,11 @@ app.use(auth);
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
 
+app.use(errorLogger);
+
 app.use('/', () => {
   throw new NotFoundErr('Запрашиваемая страница не найдена.');
 });
-
-app.use(errorLogger);
 
 app.use(errors());
 

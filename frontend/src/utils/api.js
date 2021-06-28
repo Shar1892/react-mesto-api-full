@@ -17,6 +17,7 @@ class Api {
 
 	getUser() {
 		return fetch(this._userUrl, {
+			mode: 'no-cors',
 			headers: this._headers,
 		})
 			.then((res) => this._parseResponse(res))
@@ -25,6 +26,7 @@ class Api {
 
 	setUserData(data) {
 		return fetch(this._userUrl, {
+			mode: 'no-cors',
 			method: "PATCH",
 			headers: this._headers,
 			body: JSON.stringify({
@@ -38,6 +40,7 @@ class Api {
 
 	setUserAvatar(url) {
 		return fetch(this._userAvatarUrl, {
+			mode: 'no-cors',
 			method: "PATCH",
 			headers: this._headers,
 			body: JSON.stringify({
@@ -50,6 +53,7 @@ class Api {
 
 	getCards() {
 		return fetch(this._cardUrl, {
+			mode: 'no-cors',
 			headers: this._headers,
 		})
 			.then((res) => this._parseResponse(res))
@@ -58,6 +62,7 @@ class Api {
 
 	createCard(data) {
 		return fetch(this._cardUrl, {
+			mode: 'no-cors',
 			method: "POST",
 			headers: this._headers,
 			body: JSON.stringify({
@@ -71,6 +76,7 @@ class Api {
 
 	removeCard(id) {
 		return fetch(`${this._cardUrl}/${id}`, {
+			mode: 'no-cors',
 			method: "DELETE",
 			headers: this._headers,
 		})
@@ -81,6 +87,7 @@ class Api {
 	changeLikeCardStatus(id, isLiked) {
 		if (isLiked) {
 			return fetch(`${this._cardUrl}/likes/${id}`, {
+				mode: 'no-cors',
 				method: "DELETE",
 				headers: this._headers,
 			})
@@ -88,6 +95,7 @@ class Api {
 				.catch((err) => Promise.reject(err));
 		} else {
 			return fetch(`${this._cardUrl}/likes/${id}`, {
+				mode: 'no-cors',
 				method: "PUT",
 				headers: this._headers,
 			})
