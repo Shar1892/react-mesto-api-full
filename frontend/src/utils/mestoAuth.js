@@ -1,11 +1,11 @@
 export const BASE_URL = "https://api.mestoproject.sgsharov.nomoredomains.club";
 
 export const register = (email, password) => {
+
 	return fetch(`${BASE_URL}/signup`, {
-		mode: 'no-cors',
+		mode: 'cors',
 		method: "POST",
 		headers: {
-			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({ password: password, email: email }),
@@ -20,11 +20,11 @@ export const register = (email, password) => {
 };
 
 export const authorize = (email, password) => {
+
 	return fetch(`${BASE_URL}/signin`, {
-		mode: 'no-cors',
+		mode: 'cors',
 		method: "POST",
 		headers: {
-			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({ password: password, email: email }),
@@ -36,7 +36,6 @@ export const authorize = (email, password) => {
 			return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
 		})
 		.then((data) => {
-			console.log(data);
 			if (data.token) {
 				localStorage.setItem("jwt", data.token);
 				return data;
@@ -49,10 +48,9 @@ export const authorize = (email, password) => {
 
 export const getContent = (token) => {
 	return fetch(`${BASE_URL}/users/me`, {
-		mode: 'no-cors',
+		mode: 'cors',
 		method: "GET",
 		headers: {
-			Accept: "application/json",
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},

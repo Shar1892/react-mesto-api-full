@@ -14,8 +14,6 @@ const Login = ({ onLogin }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		console.log(email);
-		console.log(password);
 		onLogin(email, password);
 	};
 

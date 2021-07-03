@@ -1,10 +1,9 @@
 class Api {
 	constructor(options) {
 		this._url = options.url;
-		this._userUrl = this._url + "users/me";
-		this._userAvatarUrl = this._url + "users/me/avatar";
-		this._cardUrl = this._url + "cards";
-		this._headers = options.headers;
+		this._userUrl = this._url + "/users/me";
+		this._userAvatarUrl = this._url + "/users/me/avatar";
+		this._cardUrl = this._url + "/cards";
 	}
 
 	_parseResponse(res) {
@@ -17,8 +16,10 @@ class Api {
 
 	getUser() {
 		return fetch(this._userUrl, {
-			mode: 'no-cors',
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 		})
 			.then((res) => this._parseResponse(res))
 			.catch((err) => Promise.reject(err));
@@ -26,9 +27,11 @@ class Api {
 
 	setUserData(data) {
 		return fetch(this._userUrl, {
-			mode: 'no-cors',
 			method: "PATCH",
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				name: data.name,
 				about: data.about,
@@ -40,9 +43,11 @@ class Api {
 
 	setUserAvatar(url) {
 		return fetch(this._userAvatarUrl, {
-			mode: 'no-cors',
 			method: "PATCH",
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				avatar: url.avatar,
 			}),
@@ -53,8 +58,10 @@ class Api {
 
 	getCards() {
 		return fetch(this._cardUrl, {
-			mode: 'no-cors',
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 		})
 			.then((res) => this._parseResponse(res))
 			.catch((err) => Promise.reject(err));
@@ -62,9 +69,11 @@ class Api {
 
 	createCard(data) {
 		return fetch(this._cardUrl, {
-			mode: 'no-cors',
 			method: "POST",
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				name: data.name,
 				link: data.link,
@@ -76,9 +85,11 @@ class Api {
 
 	removeCard(id) {
 		return fetch(`${this._cardUrl}/${id}`, {
-			mode: 'no-cors',
 			method: "DELETE",
-			headers: this._headers,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				"Content-Type": "application/json",
+			},
 		})
 			.then((res) => this._parseResponse(res))
 			.catch((err) => Promise.reject(err));
@@ -86,18 +97,22 @@ class Api {
 
 	changeLikeCardStatus(id, isLiked) {
 		if (isLiked) {
-			return fetch(`${this._cardUrl}/likes/${id}`, {
-				mode: 'no-cors',
+			return fetch(`${this._cardUrl}/${id}/likes`, {
 				method: "DELETE",
-				headers: this._headers,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+					"Content-Type": "application/json",
+				},
 			})
 				.then((res) => this._parseResponse(res))
 				.catch((err) => Promise.reject(err));
 		} else {
-			return fetch(`${this._cardUrl}/likes/${id}`, {
-				mode: 'no-cors',
+			return fetch(`${this._cardUrl}/${id}/likes`, {
 				method: "PUT",
-				headers: this._headers,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+					"Content-Type": "application/json",
+				},
 			})
 				.then((res) => this._parseResponse(res))
 				.catch((err) => Promise.reject(err));
@@ -107,8 +122,4 @@ class Api {
 
 export const api = new Api({
 	url: "https://api.mestoproject.sgsharov.nomoredomains.club",
-	headers: {
-		authorization: `Bearer ${localStorage.getItem('jwt')}`,
-		"Content-Type": "application/json",
-	},
 });

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
@@ -24,6 +25,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(bodyParser.json());
 
 app.use(requestLogger);
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+}));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -60,6 +66,8 @@ app.use('/cards', cardRouter);
 app.use(errorLogger);
 
 app.use('/', () => {
+  // eslint-disable-next-line no-console
+  console.log(33);
   throw new NotFoundErr('Запрашиваемая страница не найдена.');
 });
 

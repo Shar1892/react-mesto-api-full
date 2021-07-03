@@ -15,7 +15,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.status(200).send({ data: users });
+      res.status(200).send(users);
     })
     .catch(next);
 };
@@ -24,7 +24,7 @@ const getUser = (req, res, next) => {
   User.findById(req.params._id)
     .then((user) => {
       if (user) {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       } else {
         throw new NotFoundErr('Пользователь не найден.');
       }
@@ -36,7 +36,7 @@ const getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (user) {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       } else {
         throw new NotFoundErr('Пользователь не найден.');
       }
@@ -45,6 +45,9 @@ const getUserInfo = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
+  // eslint-disable-next-line no-console
+  console.log(11);
+
   const {
     password, email,
   } = req.body;
@@ -89,7 +92,7 @@ const updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (user) {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       } else {
         throw new NotFoundErr('Пользователь не найден.');
       }
@@ -106,7 +109,7 @@ const updateUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true })
     .then((user) => {
       if (user) {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       } else {
         throw new NotFoundErr('Пользователь не найден.');
       }
@@ -118,6 +121,8 @@ const updateUserAvatar = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
+  // eslint-disable-next-line no-console
+  console.log(22);
   const { email, password } = req.body;
 
   if (!email || !password) {

@@ -6,7 +6,7 @@ const NotOwnerErr = require('../errors/NotOwnerErr');
 const getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => {
-      res.status(200).send({ data: cards });
+      res.status(200).send(cards);
     })
     .catch(next);
 };
@@ -16,7 +16,7 @@ const createCard = (req, res, next) => {
 
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      res.status(200).send({ data: card });
+      res.status(200).send(card);
     })
     .catch(() => {
       throw new BadRequestErr('Переданы некорректные данные при создании карточки.');
@@ -31,7 +31,7 @@ const deleteCard = (req, res, next) => {
         if (card.owner.toString() === req.user._id) {
           Card.findByIdAndRemove(req.params.cardId)
             .then((dataCard) => {
-              res.status(200).send({ data: dataCard });
+              res.status(200).send(dataCard);
             });
         } else {
           throw new NotOwnerErr('Нельзя удалить чужую карточку.');
@@ -51,7 +51,7 @@ const likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.status(200).send({ data: card });
+        res.status(200).send(card);
       } else {
         throw new NotFoundErr('Карточка не найдена.');
       }
@@ -67,7 +67,7 @@ const dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.status(200).send({ data: card });
+        res.status(200).send(card);
       } else {
         throw new NotFoundErr('Карточка не найдена.');
       }

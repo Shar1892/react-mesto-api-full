@@ -73,7 +73,6 @@ const App = () => {
 	};
 
 	const handleEscClose = (evt) => {
-		debugger;
 		if (evt.key === "Escape") {
 			closeAllPopups();
 		}
@@ -126,7 +125,7 @@ const App = () => {
 	}, [loggedIn]);
 
 	const handleClickLike = (card) => {
-		const isLiked = card.likes.some((liker) => liker._id === currentUser._id);
+		const isLiked = card.likes.some((id) => id === currentUser._id);
 		api
 			.changeLikeCardStatus(card._id, isLiked)
 			.then((newCard) => {
@@ -171,7 +170,7 @@ const App = () => {
 					.then((data) => {
 						setLoggedIn(true);
 						history.push("/");
-						setEmail(data.data.email);
+						setEmail(data.email);
 					})
 					.catch((err) => {
 						console.log(err);
@@ -223,6 +222,7 @@ const App = () => {
 	};
 
 	const onSignOut = () => {
+
 		setLoggedIn(false);
 		localStorage.removeItem("jwt");
 		history.push("/signin");
